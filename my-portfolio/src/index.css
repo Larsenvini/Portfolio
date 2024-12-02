@@ -1,0 +1,82 @@
+/* Tailwind base styles with L'Oréal color palette and typography */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Custom color palette inspired by L'Oréal */
+:root {
+  /* L'Oréal Color Palette */
+  --color-primary: text-gray-900;       /* Deep Burgundy Red */
+  --color-secondary: #C0392B;     /* Rich Crimson */
+  --color-accent: #F1C40F;        /* Elegant Gold */
+  --color-background: #ffffff;    /* Soft Off-White */
+  --color-text-primary: #2C3E50;  /* Deep Charcoal Gray */
+  --color-text-secondary: #7F8C8D; /* Soft Gray */
+}
+
+/* Custom typography */
+body {
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  line-height: 1.6;
+}
+
+/* Elegant headings */
+h1, h2, h3 {
+  font-weight: 600;
+  color: var(--color-primary);
+  letter-spacing: -0.025em;
+}
+
+/* Smooth transitions and hover effects */
+a, button {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Enhanced project card hover */
+.project-card {
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.project-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Skill bars with L'Oréal color scheme */
+.skill-bar {
+  background-color: text-gray-900;
+  transition: width 0.8s ease-in-out;
+}
+
+/* Elegant button styles */
+.btn-primary {
+  background-color: var(--color-primary);
+  color: white;
+  border-radius: 9999px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-secondary);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Responsive typography */
+@media (max-width: 640px) {
+  body {
+    font-size: 14px;
+  }
+  h1 {
+    font-size: 1.875rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+}

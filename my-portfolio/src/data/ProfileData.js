@@ -25,13 +25,71 @@ const profileData = {
             "previewImage": "/img/2.png"
         },
           
-      {
-        title: "AI Chatbot",
-        description: "Machine learning-powered chatbot with natural language processing.",
-        technologies: ["Python", "TensorFlow", "Flask"],
-        githubLink: "https://github.com/janedoe/ai-chatbot",
-        liveLink: "https://my-ai-chatbot.herokuapp.com"
-      }
+        {
+            title: "Website Acadêmico",
+            description: "Desenvolvimento de um site acadêmico completo com cadastro de usuários, autenticação e exibição de conteúdos personalizados.",
+            technologies: ["TypeScript", "MongoDB", "Node.js"],
+            githubLink: "https://github.com/website-academico",
+            liveLink: "https://website-academico.com",
+            previewImage: "/path/to/website-academico-preview.jpg",
+          },
+
+          {
+            title: "Website Freelance para Academia de Futebol",
+            description: "Criação de um site profissional e responsivo, com foco em design moderno e funcionalidade, para uma academia de futebol italiana.",
+            technologies: ["React", "Next.js", "Tailwind CSS"],
+            githubLink: "https://github.com/website-academia-futebol",
+            liveLink: "https://website-academia-futebol.com",
+            previewImage: "/path/to/website-academia-futebol-preview.jpg",
+          },
+
+          {
+            title: "Aplicação Financeira com Django e Machine Learning",
+            description: "Desenvolvimento de uma plataforma financeira que utiliza modelos preditivos para análise de gastos e receitas, com geração de relatórios dinâmicos.",
+            technologies: ["Django", "Python", "Pandas", "Scikit-learn"],
+            githubLink: "https://github.com/aplicacao-financeira-ml",
+            liveLink: "https://aplicacao-financeira-ml.com",
+            previewImage: "/path/to/aplicacao-financeira-preview.jpg",
+          },
+
+          {
+            title: "Sistema Especialista com Python, Prolog e Flask",
+            description: "Criação de um sistema especialista com interface web para tomada de decisão baseada em regras.",
+            technologies: ["Python", "Prolog", "Flask"],
+            githubLink: "https://github.com/sistema-especialista",
+            liveLink: "https://sistema-especialista.com",
+            previewImage: "/path/to/sistema-especialista-preview.jpg",
+          },
+
+          {
+            title: "Sistema empresarial de Entregas",
+            description: "Desenvolvimento de um aplicativo completo para gerenciamento de entregas, incluindo cadastro de pedidos, rastreamento e notificações.",
+            technologies: ["Java"],
+            githubLink: "https://github.com/aplicativo-entregas",
+            liveLink: "https://aplicativo-entregas.com",
+            previewImage: "/path/to/aplicativo-entregas-preview.jpg",
+          },
+
+          {
+            title: "Sistema de Automação de E-mails",
+            description: "Criação de um sistema automatizado para envio e agendamento de e-mails com suporte a múltiplos provedores.",
+            technologies: ["Python", "SMTP", "Schedule"],
+            githubLink: "https://github.com/sistema-automacao-emails",
+            liveLink: "https://sistema-automacao-emails.com",
+            previewImage: "/path/to/sistema-automacao-emails-preview.jpg",
+          },
+
+          {
+            title: "Portfólio Pessoal",
+            description: "Desenvolvimento de um portfólio interativo para exibir projetos e habilidades.",
+            technologies: ["React"],
+            githubLink: "https://github.com/portfolio-pessoal",
+            liveLink: "https://portfolio-pessoal.com",
+            previewImage: "/path/to/portfolio-pessoal-preview.jpg",
+          },
+          
+
+
     ]
   };
   export default profileData;

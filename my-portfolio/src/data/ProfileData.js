@@ -55,7 +55,7 @@ const profileData = {
             technologies: ["Java"],
             githubLink: "https://github.com/Larsenvini/PrivateProjects",
             liveLink: "https://delivery-management-app.com",
-            previewImage: "/img/java.pngg",
+            previewImage: "/img/delivery.jpg",
         },
         {
             title: "Email Automation System",

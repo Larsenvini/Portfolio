@@ -98,7 +98,7 @@ function App() {
           <h2 className="text-3xl font-semibold text-gray-900 mb-6">About Me</h2>
           <p className="text-gray-600 mb-6">{profileData.aboutMe}</p>
           <a
-            href="/vinicius_larsen_dev.pdf"
+            href="/Vinicius_Larsen_Santos_Dev.pdf"
             target="_blank"
             className="inline-flex items-center bg-gray-900 text-white px-6 py-3 rounded-full hover:bg-gray-700 transition duration-300"
           >

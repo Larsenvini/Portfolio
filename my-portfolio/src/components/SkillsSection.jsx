@@ -1,21 +1,21 @@
 import React from "react";
-import iconMap from "../utils/iconMap"; // Import iconMap
+import iconMap from "../utils/iconMap"; 
 
 const SkillsSection = ({ skills }) => {
   const renderSkillIcons = (skillsList) => {
     return skillsList.map((skill, index) => {
-      const IconPath = iconMap[skill]; // Retrieve the logo path from iconMap
+      const IconPath = iconMap[skill]; 
 
       return (
         <div
           key={index}
           className="flex flex-col items-center justify-center p-4 hover:scale-110 transition-transform duration-300"
-          title={skill} // Tooltip with the skill name
+          title={skill} 
         >
           <img
-            src={IconPath} // Render the logo as an image
+            src={IconPath} 
             alt={skill}
-            className="w-12 h-12 mb-2" // Ensure consistent size for all icons
+            className="w-12 h-12 mb-2" 
           />
           <span className="text-sm text-gray-900">{skill}</span>
         </div>

@@ -1,0 +1,4 @@
+name = "my-portfolio"
+type = "javascript"
+build.command = "npm run build"
+build.directory = "dist"

@@ -43,24 +43,31 @@ const ProjectCard = ({ project }) => {
 
         {/* Links */}
         <div className="flex space-x-4 mt-auto">
-          <a
-            href={project.githubLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 hover:text-blue-800 transition flex items-center font-medium"
-          >
-            <FaGithub className="text-lg mr-2" />
-            GitHub
-          </a>
-          <a
-            href={project.liveLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 hover:text-blue-800 transition flex items-center font-medium"
-          >
-            <Briefcase className="text-lg mr-2" />
-            Live Project
-          </a>
+          {/* GitHub Link */}
+          {project.githubLink && (
+            <a
+              href={project.githubLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 hover:text-blue-800 transition flex items-center font-medium"
+            >
+              <FaGithub className="text-lg mr-2" />
+              GitHub
+            </a>
+          )}
+
+          {/* Live Project Link (Only Show If liveLink Exists) */}
+          {project.liveLink && (
+            <a
+              href={project.liveLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 hover:text-blue-800 transition flex items-center font-medium"
+            >
+              <Briefcase className="text-lg mr-2" />
+              Live Project
+            </a>
+          )}
         </div>
       </div>
     </div>

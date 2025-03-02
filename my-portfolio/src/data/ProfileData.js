@@ -4,7 +4,7 @@ const profileData = {
     email: "larsenvini8@gmail.com",
     location: "Rio de Janeiro, Brazil.",
     aboutMe: "Passionate QA Automation Engineer with expertise in full-stack development and Data Science/AI. I love designing and implementing robust test automation frameworks, ensuring software quality through efficient CI/CD pipelines, creating scalable web applications, and leveraging data and AI to solve real-world problems.",
-    profileImage: "/img/profile.JPG",
+    profileImage: "/img/profile.jpg",
     aboutImage: "/img/about.jpg",
     contacts: {
       linkedin: "https://linkedin.com/in/vinilarsen",

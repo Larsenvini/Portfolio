@@ -43,6 +43,7 @@ const profileData = {
             title: "Expert System with Python, Prolog, and Flask",
             description: "Creation of an expert system with a web interface for rule-based decision making.",
             technologies: ["Python", "Prolog", "Flask"],
+            githubLink: "https://github.com/Larsenvini/Prolog_especialist",
             previewImage: "/img/prolog.png",
         },
         {
@@ -56,7 +57,7 @@ const profileData = {
             title: "Email Automation System",
             description: "Creation of an automated system for sending and scheduling emails with support for multiple providers.",
             technologies: ["Python", "SMTP", "Schedule"],
-            githubLink: "https://github.com/Larsenvini/RacerMail-Mail-Automation",
+            githubLink: "https://github.com/Larsenvini/RacerMail-Automation",
             previewImage: "/img/email.jpg",
         },
         {

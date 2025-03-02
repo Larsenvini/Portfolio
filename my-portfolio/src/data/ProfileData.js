@@ -72,7 +72,7 @@ const profileData = {
             description: "",
             technologies: ["Playwright", "Selenium", "Github Actions"],
             githubLink: "https://github.com/Larsenvini/portfolio-tests-ci-cd",
-            previewImage: "/img/portfolio.png",
+            previewImage: "/img/ci-cd.png",
         },
     ]
 };

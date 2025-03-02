@@ -1,10 +1,10 @@
 const profileData = {
     name: "Vinicius Larsen",
-    title: "Software Engineer",
+    title: "QA Automation Engineer",
     email: "larsenvini8@gmail.com",
     location: "Rio de Janeiro, Brazil.",
-    aboutMe: "Passionate software engineer with expertise in full-stack development and Data Science/AI. I love creating efficient and scalable web applications, along with working with data and AI to solve real-world problems.",
-    profileImage: "/img/profile.jpg",
+    aboutMe: "Passionate QA Automation Engineer with expertise in full-stack development and Data Science/AI. I love designing and implementing robust test automation frameworks, ensuring software quality through efficient CI/CD pipelines, creating scalable web applications, and leveraging data and AI to solve real-world problems.",
+    profileImage: "/img/profile.JPG",
     aboutImage: "/img/about.jpg",
     contacts: {
       linkedin: "https://linkedin.com/in/vinilarsen",
@@ -12,8 +12,8 @@ const profileData = {
       email: "larsenvinicius8@gmail.com"
     },
     skills: {
-        languages: ['JavaScript', 'Python', 'TypeScript', 'Java', 'C++'],
-        technologies: ['React', 'Node.js', 'Django', 'SQL', 'Tailwind', 'Docker', 'Postman', 'Git', 'Power BI', 'Tensorflow', 'MySQL', 'PostgreSQL', 'MongoDB']
+        languages: ['JavaScript', 'Python', 'TypeScript','Java', 'C++', 'Swift',],
+        technologies: ['React', 'Node.js', 'Django', 'SQL', 'Tailwind', 'Docker', 'Selenium', 'Playwright', 'AWS', 'Jenkins', 'Kubernetes', 'Github Actions', 'DataDog', 'Xcode', 'ArgoCD', 'Postman', 'CircleCI', 'Sentry', 'Git', 'Power BI', 'Tensorflow', 'MySQL', 'PostgreSQL', 'MongoDB']
     },
     projects: [
         {
@@ -21,7 +21,6 @@ const profileData = {
             description: "A robust dashboard delivering real-time sales analytics and predictive insights powered by ARIMA models.",
             technologies: ["Python", "Django", "JS", "Chart.js", "Pandas", "ARIMA"],
             githubLink: "https://github.com/Larsenvini/Django-Sales-Dashboard",
-            liveLink: "https://your-sales-prevision-app.vercel.app",
             previewImage: "/img/2.png"
         },
         {
@@ -29,7 +28,6 @@ const profileData = {
             description: "Development of a complete academic website with user registration, authentication, and personalized content display.",
             technologies: ["TypeScript", "MongoDB", "Node.js"],
             githubLink: "https://github.com/Larsenvini/DotGeeks",
-            liveLink: "https://academic-website.com",
             previewImage: "/img/dotgeeks.png",
         },
         {
@@ -45,8 +43,6 @@ const profileData = {
             title: "Expert System with Python, Prolog, and Flask",
             description: "Creation of an expert system with a web interface for rule-based decision making.",
             technologies: ["Python", "Prolog", "Flask"],
-            githubLink: "https://github.com/Larsenvini/Prolog_especialista",
-            liveLink: "https://expert-system.com",
             previewImage: "/img/prolog.png",
         },
         {
@@ -54,7 +50,6 @@ const profileData = {
             description: "Development of a comprehensive application for managing deliveries, including order registration, tracking, and notifications.",
             technologies: ["Java"],
             githubLink: "https://github.com/Larsenvini/PrivateProjects",
-            liveLink: "https://delivery-management-app.com",
             previewImage: "/img/delivery.jpg",
         },
         {
@@ -62,7 +57,6 @@ const profileData = {
             description: "Creation of an automated system for sending and scheduling emails with support for multiple providers.",
             technologies: ["Python", "SMTP", "Schedule"],
             githubLink: "https://github.com/Larsenvini/RacerMail-Mail-Automation",
-            liveLink: "https://email-automation-system.com",
             previewImage: "/img/email.jpg",
         },
         {
@@ -71,6 +65,13 @@ const profileData = {
             technologies: ["React"],
             githubLink: "https://github.com/Larsenvini/Portfolio",
             liveLink: "https://larsenvini.pages.dev/",
+            previewImage: "/img/portfolio.png",
+        },
+        {
+            title: "CI/CD Test Pipeline for Personal Portfolio",
+            description: "",
+            technologies: ["Playwright", "Selenium", "Github Actions"],
+            githubLink: "https://github.com/Larsenvini/portfolio-tests-ci-cd",
             previewImage: "/img/portfolio.png",
         },
     ]

@@ -50,7 +50,7 @@ function App() {
       {/* Header */}
       <header className="bg-white shadow-md">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-3xl font-semibold text-gray-900">Vinicius Larsen Dev</h1>
+          <h1 className="text-3xl font-semibold text-gray-900">Vinicius Larsen</h1>
           <nav className="flex space-x-6">
             {["About", "Skills", "Projects", "Contact"].map((section) => (
               <a

@@ -80,3 +80,12 @@ a, button {
     font-size: 1.5rem;
   }
 }
+
+@media (max-width: 320px) {
+  body {
+    font-size: 14px;  /* Reduce text size */
+  }
+
+  .container {
+    width: 100%; /* Ensure full width */
+    padding: 10px; }}

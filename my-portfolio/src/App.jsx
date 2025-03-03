@@ -47,21 +47,29 @@ function App() {
 
   return (
     <div className="bg-gradient-to-b from-gray-100 to-white min-h-screen text-gray-800">
-      {/* Header */}
       <header className="bg-white shadow-md">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-3xl font-semibold text-gray-900">Vinicius Larsen</h1>
-          <nav className="flex space-x-6">
+          <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900">
+            Vinicius Larsen
+          </h1>
+
+          {/* Responsive Navigation */}
+          <nav className="hidden sm:flex space-x-4 md:space-x-6">
             {["About", "Skills", "Projects", "Contact"].map((section) => (
               <a
                 key={section}
                 href={`#${section.toLowerCase()}`}
-                className="text-gray-600 hover:text-gray-900 transition duration-300"
+                className="text-gray-600 hover:text-gray-900 transition duration-300 text-sm sm:text-base"
               >
                 {section}
               </a>
             ))}
           </nav>
+
+          {/* Mobile Menu Button - TOGGLE NAV (Optional) */}
+          <button className="sm:hidden text-gray-600 hover:text-gray-900 focus:outline-none">
+            ☰ {/* Placeholder - You can replace this with an icon */}
+          </button>
         </div>
       </header>
 

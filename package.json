@@ -1,13 +1,14 @@
 {
   "name": "my-portfolio",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "preview": "vite preview",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "test": "playwright test"  
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
@@ -18,6 +19,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.15.0",
+    "@playwright/test": "^1.50.1",  
+    "@types/node": "^22.13.8",   
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.4",
@@ -32,8 +35,7 @@
     "tailwindcss": "^3.4.15",
     "vite": "^6.0.1"
   },
-   "engines": {
-  "node": ">=18.18.0"
-}
-
+  "engines": {
+    "node": ">=18.18.0"
+  }
 }

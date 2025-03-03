@@ -82,10 +82,11 @@ a, button {
 }
 
 @media (max-width: 320px) {
-  body {
-    font-size: 14px;  /* Reduce text size */
+  .header-nav ul {
+    gap: 10px !important;  /* Reduce space between links */
   }
 
-  .container {
-    width: 100%; /* Ensure full width */
-    padding: 10px; }}
+  .header-nav a {
+    font-size: 14px !important;  /* Reduce font size */
+  }
+}

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Header from "./components/Header"; // ✅ Import the Header component
 import { LinkedinIcon, Github, Mail, FileText, ChevronLeft, ChevronRight } from "lucide-react";
 
 import ProjectCard from "./components/ProjectCard";
@@ -47,33 +48,10 @@ function App() {
 
   return (
     <div className="bg-gradient-to-b from-gray-100 to-white min-h-screen text-gray-800">
-      <header className="bg-white shadow-md">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900">
-            Vinicius Larsen
-          </h1>
+      {/* ✅ Use Header Component Here */}
+      <Header />
 
-          {/* Responsive Navigation */}
-          <nav className="hidden sm:flex space-x-4 md:space-x-6">
-            {["About", "Skills", "Projects", "Contact"].map((section) => (
-              <a
-                key={section}
-                href={`#${section.toLowerCase()}`}
-                className="text-gray-600 hover:text-gray-900 transition duration-300 text-sm sm:text-base"
-              >
-                {section}
-              </a>
-            ))}
-          </nav>
-
-          {/* Mobile Menu Button - TOGGLE NAV (Optional) */}
-          <button className="sm:hidden text-gray-600 hover:text-gray-900 focus:outline-none">
-            ☰ {/* Placeholder - You can replace this with an icon */}
-          </button>
-        </div>
-      </header>
-
-      {/* Professional Section */}
+      {/* Profile Section */}
       <section className="container mx-auto px-4 py-16 flex flex-col md:flex-row items-center">
         <div className="w-full md:w-1/2 pr-0 md:pr-12 mb-8 md:mb-0">
           <img
@@ -180,21 +158,6 @@ function App() {
                   <ChevronRight className="w-6 h-6 text-gray-800" />
                 </button>
               </div>
-            </div>
-
-            <div className="flex justify-center mt-6 gap-2">
-              {profileData.projects.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentProjectIndex(index)}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    currentProjectIndex === index 
-                      ? 'bg-gray-800 w-4' 
-                      : 'bg-gray-300'
-                  }`}
-                  aria-label={`Go to project ${index + 1}`}
-                />
-              ))}
             </div>
           </div>
         </div>

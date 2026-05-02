@@ -1,191 +1,96 @@
 import React, { useEffect, useState } from "react";
-import Header from "./components/Header"; // ✅ Import the Header component
-import { LinkedinIcon, Github, Mail, FileText, ChevronLeft, ChevronRight } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Lenis from "@studio-freight/lenis";
 
-import ProjectCard from "./components/ProjectCard";
-import SkillsSection from "./components/SkillsSection";
-import profileData from "./data/ProfileData.js";
+import Header from "./components/layout/Header";
+import Footer from "./components/layout/Footer";
+import Cursor from "./components/ui/Cursor";
+import InferenceBar from "./components/ui/InferenceBar";
+
+import Hero from "./components/sections/Hero";
+import Manifesto from "./components/sections/Manifesto";
+import Pillars from "./components/sections/Pillars";
+import Work from "./components/sections/Work";
+import About from "./components/sections/About";
+import Timeline from "./components/sections/Timeline";
+import Stack from "./components/sections/Stack";
+import Contact from "./components/sections/Contact";
+
+gsap.registerPlugin(ScrollTrigger);
 
 function App() {
-  const carouselImages = [
-    "/img/programming-code-minimalism-wallpaper-preview.jpg",
-    "/img/laptop-computer-dark-room.jpg",
-    "/img/about2.jpg",
-  ];
-
-  // State for the about section carousel
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [fade, setFade] = useState(false);
-
-  // State for the projects carousel
-  const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setFade(true);
-      setTimeout(() => {
-        setCurrentIndex((prevIndex) =>
-          prevIndex === carouselImages.length - 1 ? 0 : prevIndex + 1
-        );
-        setFade(false);
-      }, 500);
-    }, 3500);
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+    });
 
-    return () => clearInterval(interval);
-  }, [carouselImages.length]);
+    lenis.on("scroll", ScrollTrigger.update);
+    const tickFn = (time) => lenis.raf(time * 1000);
+    gsap.ticker.add(tickFn);
+    gsap.ticker.lagSmoothing(0);
 
-  const nextProject = () => {
-    setCurrentProjectIndex((prev) => 
-      prev === profileData.projects.length - 1 ? 0 : prev + 1
+    return () => {
+      lenis.destroy();
+      gsap.ticker.remove(tickFn);
+    };
+  }, []);
+
+  useEffect(() => {
+    const t = setTimeout(() => setLoading(false), 1100);
+    return () => clearTimeout(t);
+  }, []);
+
+  useEffect(() => {
+    if (loading) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -60px 0px" }
     );
-  };
 
-  const previousProject = () => {
-    setCurrentProjectIndex((prev) => 
-      prev === 0 ? profileData.projects.length - 1 : prev - 1
-    );
-  };
+    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [loading]);
 
   return (
-    <div className="bg-gradient-to-b from-gray-100 to-white min-h-screen text-gray-800">
-      {/* ✅ Use Header Component Here */}
+    <>
+      <div className={`page-loader${!loading ? " hidden" : ""}`}>
+        <div className="loader-prompt">
+          <span className="k">initializing</span>{" "}
+          <span className="v">portfolio.v4</span>
+        </div>
+        <div className="loader-bar" />
+        <div className="loader-prompt" style={{ fontSize: "9px", letterSpacing: "0.22em" }}>
+          loading model weights · context: 8192 tokens
+        </div>
+      </div>
+
+      <Cursor />
       <Header />
-
-      {/* Profile Section */}
-      <section className="container mx-auto px-4 py-16 flex flex-col md:flex-row items-center">
-        <div className="w-full md:w-1/2 pr-0 md:pr-12 mb-8 md:mb-0">
-          <img
-            src={profileData.profileImage}
-            alt={profileData.name}
-            className="rounded-full w-64 h-64 object-cover mx-auto shadow-xl border border-gray-200"
-          />
-        </div>
-        <div className="w-full md:w-1/2 text-center md:text-left">
-          <h3 className="text-4xl text-black mb-6">{profileData.title}</h3>
-          <div className="flex space-x-6 mt-4 justify-center md:justify-start">
-            <a
-              href={profileData.contacts.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-600 hover:text-gray-900 transition duration-300"
-            >
-              <LinkedinIcon />
-            </a>
-            <a
-              href={profileData.contacts.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-600 hover:text-gray-900 transition duration-300"
-            >
-              <Github />
-            </a>
-            <a
-              href={`mailto:${profileData.contacts.email}`}
-              className="text-gray-600 hover:text-gray-900 transition duration-300"
-            >
-              <Mail />
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Skills Section */}
-      <SkillsSection skills={profileData.skills} />
-
-      {/* About Me Section */}
-      <section id="about" className="container mx-auto px-4 py-16">
-        <div className="flex flex-col md:flex-row items-center">
-          <div className="w-full md:w-1/2 md:pr-8 mb-8 md:mb-0">
-            <h2 className="text-3xl font-semibold text-gray-900 mb-6">About Me</h2>
-            <p className="text-gray-600 mb-6">{profileData.aboutMe}</p>
-            <a
-              href="/Vinicius_Larsen_Santos_Dev.pdf"
-              target="_blank"
-              className="inline-flex items-center bg-gray-900 text-white px-6 py-3 rounded-full hover:bg-gray-700 transition duration-300"
-            >
-              <FileText className="mr-2" /> Download Resume
-            </a>
-          </div>
-          <div className="w-full md:w-1/2 md:pl-16">
-            <div className="relative w-full h-64 rounded-lg overflow-hidden shadow-lg">
-              <div
-                className={`absolute inset-0 transition-opacity duration-500 ${
-                  fade ? "opacity-0" : "opacity-100"
-                }`}
-              >
-                <img
-                  src={carouselImages[currentIndex]}
-                  alt={`Slide ${currentIndex}`}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Projects Section */}
-      <section id="projects" className="bg-gray-50 py-16">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-semibold text-center text-gray-900 mb-12">Projects</h2>
-          
-          {/* Desktop View */}
-          <div className="hidden md:grid md:grid-cols-2 gap-8">
-            {profileData.projects.map((project, index) => (
-              <ProjectCard key={index} project={project} />
-            ))}
-          </div>
-
-          {/* Mobile Carousel */}
-          <div className="md:hidden relative">
-            <div className="overflow-hidden">
-              <div className="relative">
-                <ProjectCard project={profileData.projects[currentProjectIndex]} />
-                
-                <button 
-                  onClick={previousProject}
-                  className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 w-10 h-10 bg-white/90 rounded-full shadow-lg flex items-center justify-center backdrop-blur-sm border border-gray-200"
-                  aria-label="Previous project"
-                >
-                  <ChevronLeft className="w-6 h-6 text-gray-800" />
-                </button>
-                
-                <button 
-                  onClick={nextProject}
-                  className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 w-10 h-10 bg-white/90 rounded-full shadow-lg flex items-center justify-center backdrop-blur-sm border border-gray-200"
-                  aria-label="Next project"
-                >
-                  <ChevronRight className="w-6 h-6 text-gray-800" />
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className="bg-white py-16">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-semibold text-gray-900 mb-6">Get In Touch</h2>
-          <p className="text-gray-600 mb-8">
-            Feel free to reach out for collaboration or just to say hello!
-          </p>
-          <a
-            href={`mailto:${profileData.contacts.email}`}
-            className="bg-gray-900 text-white px-8 py-4 rounded-full hover:bg-gray-700 transition duration-300 inline-flex items-center"
-          >
-            <Mail className="mr-2" /> Contact Me
-          </a>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-6">
-        <div className="container mx-auto px-4 text-center">
-          <p>© {new Date().getFullYear()} Vinicius Larsen. All Rights Reserved.</p>
-        </div>
-      </footer>
-    </div>
+      <InferenceBar />
+      <main>
+        <Hero />
+        <Manifesto />
+        <Pillars />
+        <Work />
+        <About />
+        <Timeline />
+        <Stack />
+        <Contact />
+      </main>
+      <Footer />
+    </>
   );
 }
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "@studio-freight/lenis";
@@ -11,6 +11,7 @@ import InferenceBar from "./components/ui/InferenceBar";
 import Hero from "./components/sections/Hero";
 import Manifesto from "./components/sections/Manifesto";
 import Pillars from "./components/sections/Pillars";
+import EvalReport from "./components/sections/EvalReport";
 import Work from "./components/sections/Work";
 import About from "./components/sections/About";
 import Timeline from "./components/sections/Timeline";
@@ -41,7 +42,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const t = setTimeout(() => setLoading(false), 1100);
+    const t = setTimeout(() => setLoading(false), 600);
     return () => clearTimeout(t);
   }, []);
 
@@ -68,7 +69,7 @@ function App() {
       <div className={`page-loader${!loading ? " hidden" : ""}`}>
         <div className="loader-prompt">
           <span className="k">initializing</span>{" "}
-          <span className="v">portfolio.v4</span>
+          <span className="v">portfolio.v5</span>
         </div>
         <div className="loader-bar" />
         <div className="loader-prompt" style={{ fontSize: "9px", letterSpacing: "0.22em" }}>
@@ -83,6 +84,7 @@ function App() {
         <Hero />
         <Manifesto />
         <Pillars />
+        <EvalReport />
         <Work />
         <About />
         <Timeline />

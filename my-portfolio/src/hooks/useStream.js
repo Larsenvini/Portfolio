@@ -47,6 +47,13 @@ export default function useStream(
   useEffect(() => {
     if (!triggered) return;
 
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setStreamed(text);
+      setIsStreaming(false);
+      setIsDone(true);
+      return;
+    }
+
     setStreamed("");
     setIsDone(false);
     setIsStreaming(false);

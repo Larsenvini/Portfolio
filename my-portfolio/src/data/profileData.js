@@ -12,9 +12,9 @@ const profileData = {
 
   // The hero terminal commands
   terminalLines: [
-    { type: "prompt", text: "$ inference --start --model=portfolio.v4" },
+    { type: "prompt", text: "$ inference --start --model=portfolio.v5" },
     { type: "system", text: "loading model weights..." },
-    { type: "system", text: "context_window: 8192 tokens" },
+    { type: "system", text: "eval gates: 14/14 passed" },
     { type: "system", text: "ready. generating output:" },
   ],
 
@@ -43,6 +43,35 @@ const profileData = {
     },
   ],
 
+  // Flagship system — featured in its own section (EvalReport) and pinned first in Work
+  flagship: {
+    name: "rag-eval-lab",
+    tagline: "A RAG system that fails its own build when quality drops.",
+    summary:
+      "Production-grade retrieval-augmented generation over Kubernetes documentation, wrapped in the same discipline I'd demand from any software: 41 labeled eval questions scored on every commit, locked baselines for regression detection, and CI that refuses to ship a worse answer.",
+    pipeline: [
+      { label: "Query", sub: "user question" },
+      { label: "Hybrid Retrieval", sub: "BM25 + embeddings + RRF" },
+      { label: "Generate", sub: "grounded, cited" },
+      { label: "Eval Gate", sub: "14 assertions in CI" },
+    ],
+    metrics: [
+      { label: "faithfulness", baseline: 0.815, current: 0.859, delta: "+4.4%" },
+      { label: "answer_relevance", baseline: 0.778, current: 0.846, delta: "+7.0%" },
+      { label: "gt_similarity", baseline: 0.61, current: 0.7, delta: "+9.0%" },
+    ],
+    highlight: { label: "retrieval_misses", baseline: "10/41", current: "3/41", delta: "−70%" },
+    facts: [
+      "N=3 median runs to tame LLM-judge variance",
+      "Locked baselines — regressions fail the build",
+      "Daily smoke tests against the live deployment",
+      "Ablation studies documented per experiment",
+    ],
+    technologies: ["Python", "FastAPI", "ChromaDB", "OpenAI", "pytest", "GitHub Actions", "Docker", "Fly.io"],
+    githubLink: "https://github.com/Larsenvini/rag-eval-lab",
+    liveLink: "https://rag-eval-lab.fly.dev/",
+  },
+
   bioParagraphs: [
     "I'm an AI Engineer based in Rio de Janeiro. My background is QA Automation — which means before I built models, I was building the infrastructure that catches things when they break.",
     "That perspective stuck. Today I work on the full ML stack: RAG pipelines, model evaluation, CI/CD for AI, and the production systems most teams skip until something breaks.",
@@ -60,8 +89,16 @@ const profileData = {
 
   experience: [
     {
+      role: "AI / MLOps Engineer",
+      company: "Independent",
+      period: "2025 — Present",
+      description:
+        "Designed and shipped rag-eval-lab: a production RAG system with hybrid retrieval (BM25 + embeddings + reciprocal rank fusion), automated LLM-judge evaluation, and CI quality gates that block regressions. Deployed on Fly.io with daily smoke tests.",
+      tags: ["FastAPI", "ChromaDB", "OpenAI", "GitHub Actions", "Docker"],
+    },
+    {
       role: "QA Automation Engineer",
-      company: "Current Role",
+      company: "Carta",
       period: "2023 — Present",
       description:
         "Maintaining E2E test frameworks in Playwright and Selenium, building CI/CD pipelines on GitHub Actions, and shifting QA earlier in the development cycle.",
@@ -86,9 +123,9 @@ const profileData = {
   ],
 
   skills: {
-    "AI / ML": ["Python", "PyTorch", "TensorFlow", "OpenAI API", "LangChain", "RAG"],
-    "MLOps": ["Docker", "Kubernetes", "MLflow", "GitHub Actions", "FastAPI", "Pinecone"],
-    "QA & Testing": ["Playwright", "Selenium", "Cypress", "Postman", "API Testing"],
+    "AI / ML": ["Python", "RAG Pipelines", "LLM Evaluation", "Hybrid Retrieval", "OpenAI API", "PyTorch"],
+    "MLOps": ["Docker", "GitHub Actions", "FastAPI", "ChromaDB", "MLflow", "Fly.io"],
+    "QA & Testing": ["Playwright", "Selenium", "pytest", "Cypress", "API Testing"],
     "Languages": ["Python", "TypeScript", "JavaScript", "Java", "C++", "SQL"],
     "Frontend": ["React", "Next.js", "Tailwind CSS", "Framer Motion"],
     "Backend & Data": ["Node.js", "Django", "Flask", "PostgreSQL", "MongoDB", "Redis"],
@@ -97,6 +134,24 @@ const profileData = {
   projects: [
     {
       idx: "I",
+      title: "RAG Eval Lab",
+      category: "AI",
+      status: "Live",
+      description:
+        "Production RAG over Kubernetes docs with hybrid retrieval. 41 labeled eval questions and 14 CI assertions gate every commit.",
+      technologies: ["Python", "FastAPI", "ChromaDB", "OpenAI", "GitHub Actions", "Docker", "Fly.io"],
+      githubLink: "https://github.com/Larsenvini/rag-eval-lab",
+      liveLink: "https://rag-eval-lab.fly.dev/",
+      previewImage: "/img/rag-system.png",
+      featured: true,
+      metrics: [
+        { label: "faithfulness", value: "0.859", delta: "+4.4%" },
+        { label: "relevance", value: "0.846", delta: "+7.0%" },
+        { label: "retrieval_misses", value: "3/41", delta: "−70%" },
+      ],
+    },
+    {
+      idx: "II",
       title: "CI/CD Test Pipeline for Portfolio",
       category: "QA",
       status: "In Operation",
@@ -105,10 +160,9 @@ const profileData = {
       technologies: ["Playwright", "Selenium", "GitHub Actions"],
       githubLink: "https://github.com/Larsenvini/portfolio-tests-ci-cd",
       previewImage: "/img/ci-cd.png",
-      featured: true,
     },
     {
-      idx: "II",
+      idx: "III",
       title: "Sales Insights & Forecasting Platform",
       category: "Full Stack",
       status: "In Operation",
@@ -119,7 +173,7 @@ const profileData = {
       previewImage: "/img/2.png",
     },
     {
-      idx: "III",
+      idx: "IV",
       title: "Forza Seven — Soccer Academy",
       category: "Full Stack",
       status: "Live",
@@ -131,7 +185,7 @@ const profileData = {
       previewImage: "/img/forza.png",
     },
     {
-      idx: "IV",
+      idx: "V",
       title: "DotGeeks — Academic Platform",
       category: "Full Stack",
       status: "Archived",
@@ -142,7 +196,7 @@ const profileData = {
       previewImage: "/img/dotgeeks.png",
     },
     {
-      idx: "V",
+      idx: "VI",
       title: "Prolog Expert System",
       category: "AI",
       status: "Archived",
@@ -153,7 +207,7 @@ const profileData = {
       previewImage: "/img/prolog.png",
     },
     {
-      idx: "VI",
+      idx: "VII",
       title: "RacerMail — Email Automation",
       category: "Automation",
       status: "Archived",
@@ -164,7 +218,7 @@ const profileData = {
       previewImage: "/img/email.png",
     },
     {
-      idx: "VII",
+      idx: "VIII",
       title: "Delivery Management System",
       category: "Full Stack",
       status: "Archived",
@@ -177,15 +231,6 @@ const profileData = {
   ],
 
   comingNext: [
-    {
-      idx: "VIII",
-      title: "RAG Pipeline + Evaluation Framework",
-      category: "MLOps",
-      status: "In Formation",
-      description:
-        "End-to-end RAG system with a labeled evaluation set, automated quality scoring, and CI integration. The AI project that proves QA + AI are the same skill.",
-      technologies: ["LangChain", "RAGAS", "Pinecone", "FastAPI", "GitHub Actions"],
-    },
     {
       idx: "IX",
       title: "MLflow Pipeline with DVC",

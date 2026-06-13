@@ -25,13 +25,35 @@ const statusStyle = {
 export default function Work() {
   const sectionRef = useRef(null);
   const trackRef = useRef(null);
+  const headRef = useRef(null);
   const [active, setActive] = useState("All");
+  // Distance from the top of the section down to where cards may begin —
+  // measured from the absolutely-positioned header so cards never slide under it.
+  const [trackTop, setTrackTop] = useState(210);
 
   const allProjects = [...profileData.projects, ...profileData.comingNext];
   const filtered =
     active === "All"
       ? allProjects
       : allProjects.filter((p) => p.category === active);
+
+  // Keep the card track below the header at any viewport width / wrap state
+  useEffect(() => {
+    const el = headRef.current;
+    if (!el) return;
+    const update = () => {
+      // header sits at top:60px; add its height + a 32px gap
+      setTrackTop(Math.round(60 + el.getBoundingClientRect().height + 32));
+    };
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    window.addEventListener("resize", update);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", update);
+    };
+  }, []);
 
   useEffect(() => {
     if (window.matchMedia("(max-width: 900px)").matches) return;
@@ -73,7 +95,7 @@ export default function Work() {
         borderTop: "1px solid var(--border)",
       }}
     >
-      <div style={{
+      <div className="work-head" ref={headRef} style={{
         position: "absolute", top: "60px",
         left: "clamp(24px, 6vw, 80px)", right: "clamp(24px, 6vw, 80px)",
         zIndex: 2,
@@ -126,8 +148,10 @@ export default function Work() {
 
       <div
         ref={trackRef}
+        className="work-track"
         style={{
-          position: "absolute", top: 0, left: 0, height: "100%",
+          position: "absolute", top: trackTop, left: 0,
+          height: `calc(100% - ${trackTop}px)`,
           display: "flex", alignItems: "center", gap: "32px",
           paddingLeft: "clamp(24px, 6vw, 80px)",
           paddingRight: "80px",
@@ -170,7 +194,7 @@ export default function Work() {
                   width: "100%", aspectRatio: "16/10",
                   background: "var(--bg3)",
                   position: "relative", overflow: "hidden",
-                  flexShrink: 0,
+                  flexShrink: 1, minHeight: "140px",
                   filter: isFormation ? "grayscale(0.5)" : "none",
                 }}>
                   <img
@@ -191,6 +215,40 @@ export default function Work() {
                       {project.previewImage.split("/").pop()}
                     </span>
                   </div>
+
+                  {project.metrics && (
+                    <div style={{
+                      position: "absolute", left: "10px", right: "10px", bottom: "10px",
+                      display: "flex", gap: "6px",
+                    }}>
+                      {project.metrics.map((m) => (
+                        <div key={m.label} style={{
+                          flex: 1,
+                          background: "rgba(10,10,12,0.72)",
+                          backdropFilter: "blur(10px)",
+                          WebkitBackdropFilter: "blur(10px)",
+                          border: "1px solid rgba(45,212,191,0.22)",
+                          borderRadius: "7px",
+                          padding: "7px 9px",
+                          fontFamily: "var(--mono)",
+                          lineHeight: 1.4,
+                          minWidth: 0,
+                        }}>
+                          <div style={{
+                            fontSize: "8px", letterSpacing: "0.08em",
+                            color: "var(--text2)", textTransform: "uppercase",
+                            whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
+                          }}>{m.label}</div>
+                          <div style={{ fontSize: "12px", color: "#fff", fontWeight: 500, whiteSpace: "nowrap" }}>
+                            {m.value}
+                            <span style={{ fontSize: "9px", color: "var(--accent)", marginLeft: "5px" }}>
+                              {m.delta}
+                            </span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               )}
 
@@ -200,7 +258,7 @@ export default function Work() {
                   background: "var(--bg3)",
                   position: "relative",
                   display: "flex", alignItems: "center", justifyContent: "center",
-                  flexShrink: 0,
+                  flexShrink: 1, minHeight: "140px",
                   borderBottom: "1px dashed var(--border2)",
                 }}>
                   <div style={{
@@ -212,7 +270,7 @@ export default function Work() {
                 </div>
               )}
 
-              <div style={{ padding: "24px 28px", display: "flex", flexDirection: "column", flex: 1 }}>
+              <div style={{ padding: "24px 28px", display: "flex", flexDirection: "column", flex: "1 0 auto" }}>
                 <div style={{
                   display: "flex", justifyContent: "space-between", alignItems: "center",
                   marginBottom: "14px",
@@ -342,15 +400,20 @@ export default function Work() {
             height: auto !important;
             padding: 80px 24px;
           }
-          #work > div:last-child {
-            position: relative !important;
+          .work-head {
+            position: static !important;
+            margin-bottom: 48px;
+          }
+          .work-track {
+            position: static !important;
             display: grid !important;
             grid-template-columns: 1fr !important;
-            transform: none !important;
+            gap: 24px !important;
+            height: auto !important;
             padding: 0 !important;
-            margin-top: 120px;
+            transform: none !important;
           }
-          #work > div:last-child > div {
+          .work-track > div {
             width: 100% !important;
             height: auto !important;
           }

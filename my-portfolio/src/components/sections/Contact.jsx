@@ -47,7 +47,7 @@ export default function Contact() {
             marginBottom: "60px",
           }}
         >
-          Let's build{" "}
+          Let&apos;s build{" "}
           <span style={{
             fontFamily: "var(--serif)", fontStyle: "italic",
             color: "var(--accent)", fontWeight: 400,
@@ -73,9 +73,10 @@ export default function Contact() {
           <a
             ref={emailRef}
             href={`mailto:${profileData.contacts.email}`}
-            className="magnetic"
+            className="magnetic contact-email"
             style={{
               display: "inline-flex", alignItems: "center", gap: "14px",
+              maxWidth: "100%",
               fontFamily: "var(--sans)",
               fontSize: "clamp(20px, 2.6vw, 32px)",
               fontWeight: 600,
@@ -91,9 +92,9 @@ export default function Contact() {
             onMouseLeave={(e) => (e.currentTarget.style.background = "var(--accent)")}
           >
             {profileData.contacts.email}
-            <span style={{
+            <span className="contact-email-arrow" style={{
               display: "inline-flex", alignItems: "center", justifyContent: "center",
-              width: "40px", height: "40px",
+              width: "40px", height: "40px", flexShrink: 0,
               borderRadius: "50%",
               background: "var(--bg)",
               color: "var(--accent)",
@@ -152,6 +153,7 @@ export default function Contact() {
           paddingTop: "40px",
           borderTop: "1px dashed var(--border2)",
           display: "flex", alignItems: "center", gap: "12px",
+          flexWrap: "wrap", rowGap: "6px",
           fontFamily: "var(--mono)", fontSize: "11px", letterSpacing: "0.18em",
           color: "var(--text3)", textTransform: "uppercase",
         }}>
@@ -167,6 +169,21 @@ export default function Contact() {
           <span style={{ color: "var(--accent)" }}>4096 / 4096</span>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 600px) {
+          .contact-email {
+            font-size: clamp(13px, 4.2vw, 18px) !important;
+            padding: 13px 18px !important;
+            gap: 8px !important;
+          }
+          .contact-email-arrow {
+            width: 30px !important;
+            height: 30px !important;
+            font-size: 13px !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

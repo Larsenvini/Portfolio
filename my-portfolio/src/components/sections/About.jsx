@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import profileData from "../../data/profileData";
 import Stream from "../ui/Stream";
 
@@ -28,7 +27,7 @@ export default function About() {
   const details = [
     { key: "Location", val: profileData.location },
     { key: "Discipline", val: "AI · MLOps · QA" },
-    { key: "Experience", val: "2–5 years" },
+    { key: "Experience", val: "3 years" },
     { key: "Languages", val: "Python · TS · Java" },
     { key: "Status", val: "Open to opportunities", highlight: true },
     { key: "LinkedIn", val: "vinilarsen", link: profileData.contacts.linkedin },
@@ -69,7 +68,7 @@ export default function About() {
         >
           One engineer.{" "}
           <span style={{ fontFamily: "var(--serif)", fontStyle: "italic", color: "var(--accent)", fontWeight: 400 }}>
-            Five disciplines.
+            Three disciplines.
           </span>{" "}
           Zero silos.
         </h2>

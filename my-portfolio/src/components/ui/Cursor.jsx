@@ -11,30 +11,16 @@ export default function Cursor() {
     const ringEl = ring.current;
     if (!dotEl || !ringEl) return;
 
-    let mouseX = 0, mouseY = 0;
-    let ringX = 0, ringY = 0;
-
+    // Follow the pointer 1:1 — no trailing/lerp, so it reads as a crisp custom cursor
     const onMove = (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      dotEl.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+      const t = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+      dotEl.style.transform = t;
+      ringEl.style.transform = t;
     };
 
-    const animate = () => {
-      ringX += (mouseX - ringX) * 0.16;
-      ringY += (mouseY - ringY) * 0.16;
-      ringEl.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
-      requestAnimationFrame(animate);
-    };
-    requestAnimationFrame(animate);
-
-    const onDown = () => ringEl.classList.add("click");
-    const onUp = () => ringEl.classList.remove("click");
-    const setHover = (on) => () => on ? ringEl.classList.add("hover") : ringEl.classList.remove("hover");
+    const setHover = (on) => () => ringEl.classList.toggle("hover", on);
 
     document.addEventListener("mousemove", onMove);
-    document.addEventListener("mousedown", onDown);
-    document.addEventListener("mouseup", onUp);
 
     const interactive = "a, button, [role='button'], .magnetic, .interactive";
     const bind = (el) => {
@@ -52,8 +38,6 @@ export default function Cursor() {
 
     return () => {
       document.removeEventListener("mousemove", onMove);
-      document.removeEventListener("mousedown", onDown);
-      document.removeEventListener("mouseup", onUp);
       obs.disconnect();
     };
   }, []);

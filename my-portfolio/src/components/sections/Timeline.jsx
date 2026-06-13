@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import profileData from "../../data/profileData";
 
 export default function Timeline() {

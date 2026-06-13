@@ -57,7 +57,7 @@ export default function InferenceBar() {
         </span>
         <span className="inf-cell">
           <span className="k">model:</span>
-          <span className="v">portfolio.v4</span>
+          <span className="v">portfolio.v5</span>
         </span>
         <span className="inf-cell">
           <span className="k">temp:</span>

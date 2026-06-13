@@ -11,7 +11,7 @@ function TerminalBoot({ onComplete }) {
 
   useEffect(() => {
     if (currentLine >= lines.length) {
-      const t = setTimeout(() => onComplete?.(), 350);
+      const t = setTimeout(() => onComplete?.(), 160);
       return () => clearTimeout(t);
     }
 
@@ -23,13 +23,14 @@ function TerminalBoot({ onComplete }) {
         clearInterval(interval);
         setShownLines((prev) => [...prev, currentLine]);
         setCurrentText("");
-        setTimeout(() => setCurrentLine((c) => c + 1), 180);
+        setTimeout(() => setCurrentLine((c) => c + 1), 70);
         return;
       }
       setCurrentText(target.slice(0, i));
-    }, 18);
+    }, 9);
 
     return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- re-running on parent re-renders would reset mid-line typing
   }, [currentLine]);
 
   return (
@@ -68,15 +69,16 @@ function TerminalBoot({ onComplete }) {
 function StreamingHeadline() {
   const fullText = `${profileData.heroLead} ${profileData.heroAccent}`;
   const splitIdx = profileData.heroLead.length + 1; // where accent starts
-  const [shown, setShown] = useState(0);
-  const [done, setDone] = useState(false);
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const [shown, setShown] = useState(reduce ? fullText.length : 0);
+  const [done, setDone] = useState(reduce);
 
   useEffect(() => {
     if (shown >= fullText.length) {
       setDone(true);
       return;
     }
-    const t = setTimeout(() => setShown((s) => s + 1), 38);
+    const t = setTimeout(() => setShown((s) => s + 1), 22);
     return () => clearTimeout(t);
   }, [shown, fullText.length]);
 
@@ -114,7 +116,8 @@ function StreamingHeadline() {
 
 // Streaming dek
 function StreamingDek({ start }) {
-  const [shown, setShown] = useState(0);
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const [shown, setShown] = useState(reduce ? profileData.heroDek.length : 0);
   useEffect(() => {
     if (!start) return;
     if (shown >= profileData.heroDek.length) return;
@@ -137,20 +140,27 @@ function StreamingDek({ start }) {
   );
 }
 
+const prefersReducedMotion = () =>
+  typeof window !== "undefined" &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 export default function Hero() {
-  const [stage, setStage] = useState("boot"); // boot → headline → done
-  const [headlineStart, setHeadlineStart] = useState(false);
-  const [dekStart, setDekStart] = useState(false);
-  const [ctaShow, setCtaShow] = useState(false);
+  const reduce = prefersReducedMotion();
+  const [stage, setStage] = useState(reduce ? "headline" : "boot"); // boot → headline → done
+  const [headlineStart, setHeadlineStart] = useState(reduce);
+  const [dekStart, setDekStart] = useState(reduce);
+  const [ctaShow, setCtaShow] = useState(reduce);
   const cta1 = useMagnetic(0.25);
   const cta2 = useMagnetic(0.25);
 
   const handleBootDone = () => {
     setStage("headline");
-    setTimeout(() => setHeadlineStart(true), 200);
-    // Start dek a little after headline begins
-    setTimeout(() => setDekStart(true), 200 + 80 * 38); // rough ms for headline
-    setTimeout(() => setCtaShow(true), 200 + 80 * 38 + 1200);
+    setHeadlineStart(true);
+    // Start dek right after the headline finishes streaming, CTAs as the dek wraps up
+    const headlineMs =
+      (profileData.heroLead.length + profileData.heroAccent.length + 1) * 22;
+    setTimeout(() => setDekStart(true), headlineMs + 150);
+    setTimeout(() => setCtaShow(true), headlineMs + 1100);
   };
 
   return (
@@ -239,15 +249,6 @@ export default function Hero() {
         {/* Stage 2+: headline */}
         {stage !== "boot" && (
           <>
-            <p style={{
-              fontFamily: "var(--mono)", fontSize: "11px", letterSpacing: "0.22em",
-              color: "var(--text3)", textTransform: "uppercase",
-              marginBottom: "28px",
-              animation: "fadeIn 0.5s",
-            }}>
-              ◆  Output Stream
-            </p>
-
             {headlineStart && <StreamingHeadline />}
             {dekStart && <StreamingDek start={dekStart} />}
 
@@ -304,7 +305,7 @@ export default function Hero() {
         {[
           { label: "Discipline", val: "AI · MLOps · QA" },
           { label: "Method", val: "Build → Test → Ship" },
-          { label: "Edition", val: "v4 · 2026" },
+          { label: "Edition", val: "v5 · 2026" },
         ].map((s, i) => (
           <div key={i}>
             <p style={{
